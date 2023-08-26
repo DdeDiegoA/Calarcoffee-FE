@@ -1,0 +1,24 @@
+:root {
+  --white: #ffffff;
+  --strong-red: #a8151c;
+  --ligth-red: #b92e3cc5;
+  --strong-green: #48802f;
+  --ligth-green: #7bb85b;
+  --black: #000000;
+  --secondary-white: #f9f9f9;
+  --gray-background: #eeeeee;
+  --strong-brown: #772409;
+  --hand-gray: #b9b9b9;
+  background-color: var(--secondary-white);
+}
+* {
+  font-family: 'Roboto', sans-serif;
+}
+a {
+  color: var(--ligth-red);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--strong-red);
+  text-decoration: underline;
+}

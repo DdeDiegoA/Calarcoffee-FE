@@ -1,0 +1,56 @@
+.inputStaticContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.staticInput {
+  border: 2px solid var(--hand-gray);
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 12px 15px;
+  color: var(--black);
+  font-weight: 500;
+  outline: none;
+  caret-color: var(--strong-green);
+  transition-duration: 0.3s;
+  font-family: 'Roboto', sans-serif, Whitney, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin-bottom: 1.8rem;
+  width: 100%;
+}
+.staticInputIcon {
+  position: absolute;
+  width: 14px;
+  top: -26px;
+  left: 0px;
+  transition: 0.2s linear;
+  color: var(--strong-green);
+}
+.staticInputLabel {
+  position: absolute;
+  top: -25px;
+  left: 0px;
+  color: var(--strong-green);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif, Whitney, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  transition: 0.2s linear;
+}
+.staticEyeIcon {
+  position: absolute;
+  top: 14px;
+  right: 30px;
+  opacity: 0;
+  transition: 0.2s linear;
+  color: var(--ligth-green);
+}
+.staticInput:focus,
+.staticInput:valid {
+  background-color: #ddd;
+  transition-duration: 0.3s;
+  border-color: transparent;
+}

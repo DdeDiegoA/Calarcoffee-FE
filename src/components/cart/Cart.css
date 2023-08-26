@@ -1,0 +1,76 @@
+.cart_button {
+  color: var(--strong-green);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.5s ease-out;
+}
+.cart_button:hover {
+  transform: scale(1.2, 1.2);
+}
+.cart_slider .offcanvas-title {
+  color: var(--strong-green);
+  font-weight: bold;
+}
+.cart_slider .offcanvas-title i {
+  font-weight: 200;
+}
+.cart_content_container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 0 15px;
+}
+.cart_content_products {
+  overflow-y: auto;
+  width: 100%;
+}
+.cart_footer_content {
+  width: 100%;
+  background-color: var(--white);
+  box-shadow: 0 0 10px rgb(0 0 0/75%);
+  border-radius: 15px 15px 0 0;
+  padding: 10px 15px;
+}
+.cart_footer_content p {
+  line-height: 0.9;
+  font-size: 0.8rem;
+}
+.cart_resume-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--black);
+}
+.cart_resume-total-title {
+  font-weight: 700;
+}
+.cart_resume-total {
+  font-size: 16px;
+  padding: 10px 0;
+  margin: 5px 0;
+  color: var(--strong-green);
+  border-top: 1px solid var(--hand-gray);
+  border-bottom: 1px solid var(--hand-gray);
+}
+.cart_resume-total .cart_resume-total-price {
+  font-weight: 900;
+}
+.cart_resume-pay {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--strong-green);
+  color: var(--white);
+  transition: all 0.2s;
+  border: 0;
+  margin-top: 5px;
+}
+@media (max-width: 768px) {
+  .cart_button {
+    border-radius: 50%;
+    background-color: var(--strong-green);
+    color: var(--white);
+    padding: 0.4rem 0.7rem;
+  }
+}

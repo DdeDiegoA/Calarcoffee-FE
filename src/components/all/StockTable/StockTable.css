@@ -1,0 +1,19 @@
+.stock-container {
+  height: 100%;
+  max-width: 100%;
+  max-height: 25rem;
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  border-radius: 5px;
+  overflow: auto;
+}
+
+@media (max-width: 462px) {
+  .stock-container {
+    width: auto;
+    padding: 0.2rem 1rem;
+  }
+  .stock-container .table__cell {
+    min-width: 8rem;
+  }
+}

@@ -1,0 +1,38 @@
+.customStatic-select {
+  position: relative;
+  width: 100%;
+}
+.staticInput_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.staticselect_Input {
+  border: 2px solid var(--hand-gray);
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 12px 15px;
+  color: --black;
+  font-weight: 500;
+  outline: none;
+  caret-color: var(--strong-green);
+  transition-duration: 0.3s;
+  font-family: 'Roboto', sans-serif, Whitney, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin-bottom: 1.8rem;
+  width: 100%;
+}
+.staticSelect_InputLabel {
+  position: absolute;
+  top: -25px;
+  left: 0px;
+  color: var(--strong-green);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif, Whitney, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  transition: 0.2s linear;
+}

@@ -1,0 +1,24 @@
+.changes_data_container {
+  padding: 2rem 3rem !important;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(221, 221, 221, 0.707);
+}
+.changes_data_container h3 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--strong-green);
+  font-weight: 700;
+}
+.changes_data_container button {
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 2rem;
+  color: var(--white);
+  background-color: var(--ligth-green);
+  align-self: center;
+  transition: background 0.2s ease;
+}
+.changes_data_container button:hover {
+  background-color: var(--strong-green);
+}

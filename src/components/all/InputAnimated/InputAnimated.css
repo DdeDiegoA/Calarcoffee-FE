@@ -1,0 +1,95 @@
+.inputContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+#inputField {
+  border: 2px solid var(--hand-gray);
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 12px 15px;
+  color: var(--black);
+  font-weight: 500;
+  outline: none;
+  caret-color: var(--strong-green);
+  transition-duration: 0.3s;
+  font-family: 'Roboto', sans-serif, Whitney, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  margin-bottom: 1.8rem;
+  width: 100%;
+}
+
+.inputAnimatedIcon {
+  position: absolute;
+  width: 14px;
+  top: -26px;
+  left: -15px;
+  opacity: 0;
+  transition: 0.2s linear;
+  color: var(--strong-green);
+}
+.eyeIcon {
+  position: absolute;
+  top: 14px;
+  right: 30px;
+  opacity: 0;
+  transition: 0.2s linear;
+  color: var(--ligth-green);
+}
+
+.inputAnimatedLabel {
+  position: absolute;
+  top: -25px;
+  left: 5px;
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif, Whitney, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  transition: 0.2s linear;
+  opacity: 0;
+  cursor: none;
+}
+
+#inputField:focus ~ .inputAnimatedLabel,
+#inputField:valid ~ .inputAnimatedLabel {
+  transform: translateX(20px);
+  opacity: 1;
+}
+
+#inputField:focus ~ .inputAnimatedIcon,
+#inputField:valid ~ .inputAnimatedIcon {
+  transform: translateX(20px);
+  opacity: 1;
+}
+
+#inputField:focus ~ .eyeIcon,
+#inputField:valid ~ .eyeIcon {
+  transform: translateX(20px);
+  opacity: 1;
+  cursor: pointer;
+}
+
+#inputField:focus,
+#inputField:valid {
+  background-color: #ddd;
+  transition-duration: 0.3s;
+  border-color: transparent;
+}
+/* input number */
+.input_number {
+  /* Estilos adicionales que desees aplicar al input */
+  -moz-appearance: textfield; /* Firefox */
+  appearance: texfield;
+}
+
+/* Para navegadores WebKit (Safari, Chrome, Edge) */
+.input_number::-webkit-inner-spin-button,
+.input_number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

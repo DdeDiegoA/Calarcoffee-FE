@@ -1,0 +1,47 @@
+.collapseComponent {
+  margin-bottom: 10px;
+}
+.collapseComponent__container {
+  padding: 10px 0;
+}
+.marcketPlace_filters .collapser {
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--strong-brown);
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+  /* background-color: var(--defaultPurple); */
+}
+.marcketPlace_filters .collapser:hover {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--ligth-green);
+}
+.marketPlace_container .marcketPlace_filters .collapser:active {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--black);
+}
+.head__collapser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.collapser__title {
+  font-size: 0.98rem;
+}
+.superTitle {
+  font-size: 1.1rem;
+}
+.collapseComponent__container .keywords {
+  margin-bottom: 0;
+}
+.collapseComponent__container .filter__btn {
+  margin-top: 0;
+}
