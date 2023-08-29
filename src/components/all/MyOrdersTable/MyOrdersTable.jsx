@@ -1,5 +1,5 @@
-import './MyOrdersTable.css';
 import PropTypes from 'prop-types';
+import './MyOrdersTable.css';
 
 const MyOrdersTable = (props) => {
   const { data } = props;

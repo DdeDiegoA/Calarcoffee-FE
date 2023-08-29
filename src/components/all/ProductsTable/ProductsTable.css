@@ -1,0 +1,51 @@
+.products_table_container {
+  height: 100%;
+  max-width: 100%;
+  max-height: 25rem;
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  border-radius: 5px;
+  overflow: auto;
+}
+.edit-button {
+  color: blue;
+  font-size: 1.1rem;
+}
+.edit-button:hover {
+  color: rgba(5, 5, 210, 0.908);
+}
+.edit-button:active {
+  color: rgba(2, 2, 139, 0.853);
+  transform: scale(1.05);
+}
+.table__cell-actions .editStock-button {
+  padding: 0.2rem 0.5rem;
+  background-color: var(--ligth-green);
+  border-radius: 5px;
+  color: var(--white);
+}
+.table__cell-actions .editStock-button:hover {
+  box-shadow: 0 0 10px rgba(152, 152, 152, 0.504);
+}
+.table__cell-actions .editStock-button:active {
+  background-color: var(--strong-green);
+}
+.delete-button {
+  color: red;
+  font-size: 1.1rem;
+}
+.delete-button:hover {
+  color: rgb(210, 3, 3);
+}
+.delete-button:active {
+  color: rgba(168, 3, 3, 0.889);
+  transform: scale(1.05);
+}
+@media (max-width: 462px) {
+  .products_table_container {
+    padding: 0;
+  }
+  .products_table_container .table__cell {
+    width: 8rem;
+  }
+}
