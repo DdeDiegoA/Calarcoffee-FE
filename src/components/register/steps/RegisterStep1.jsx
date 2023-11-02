@@ -232,6 +232,4 @@ const mapDispatchToProps = {
   checkPassword,
 };
 
-const step1 = connect(mapStateToProps, mapDispatchToProps)(RegisterStep1);
-
-export default step1;
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterStep1);

@@ -157,5 +157,4 @@ const mapDispatchToProps = {
   setRegisterDataPolicy,
 };
 
-const step2 = connect(mapStateToProps, mapDispatchToProps)(RegisterStep2);
-export default step2;
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterStep2);

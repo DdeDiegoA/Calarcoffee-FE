@@ -1,6 +1,9 @@
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import CategoriesTable from '../../../../components/all/CategoriesTable/CategoriesTable';
+import InputAnimated from '../../../../components/all/inputAnimated/InputAnimated';
 
-const DashboardCategoriesView = () => {
+export const DashboardCategoriesView = (props) => {
   const data = [
     {
       id: 12312,
@@ -18,12 +21,34 @@ const DashboardCategoriesView = () => {
   return (
     <div className='index_dashboard-container'>
       <h2>Categories</h2>
-      <div className='d-flex gap-3'>
+      <div className='row'>
         <CategoriesTable data={data} />
-        <div className='flex-fill'>hola form</div>
+        <div className='col-md-6'>
+          <div>
+            <InputAnimated
+              icon='bi bi-envelope-at-fill'
+              isRequired={true}
+              label='Nombre de la categoria'
+              placeholder='Nombre de la categoria'
+              type='text'
+            />
+            <button>Agregar nuevo</button>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default DashboardCategoriesView;
+DashboardCategoriesView.propTypes = {
+  second: PropTypes.third,
+};
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardCategoriesView);

@@ -10,17 +10,16 @@ const SelectStatic = ({
   placeholder,
   value,
   onChange,
+  disabled,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(options);
   const blurTimeout = useRef();
-
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
     onChange(inputValue);
-
     const filtered = options.filter((option) =>
-      option.toLowerCase().includes(inputValue.toLowerCase())
+      option.name.toLowerCase().includes(inputValue.toLowerCase())
     );
     setFilteredOptions(filtered);
   };
@@ -45,7 +44,6 @@ const SelectStatic = ({
     handleOptionSelect(option);
     setIsFocused(false);
   };
-
   return (
     <div className='customStatic-select'>
       <div className={`staticInput_container`}>
@@ -59,6 +57,7 @@ const SelectStatic = ({
           autoComplete='off'
           className={`staticselect_Input ${value ? 'filled' : ''}`}
           placeholder={placeholder}
+          disabled={disabled}
         />
         <i
           className='bi bi-chevron-down select_down_icon'
@@ -72,15 +71,16 @@ const SelectStatic = ({
       <div
         className={`options-container ${isFocused ? 'options_visible' : ''}`}
       >
-        {filteredOptions.map((option, index) => (
-          <div
-            key={index}
-            className='option'
-            onClick={() => handleOptionClick(option)}
-          >
-            {option}
-          </div>
-        ))}
+        {filteredOptions !== null &&
+          filteredOptions.map((option, index) => (
+            <div
+              key={index}
+              className='option'
+              onClick={() => handleOptionClick(option)}
+            >
+              {option.name}
+            </div>
+          ))}
       </div>
     </div>
   );
@@ -94,6 +94,7 @@ SelectStatic.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.any,
   onChange: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default SelectStatic;

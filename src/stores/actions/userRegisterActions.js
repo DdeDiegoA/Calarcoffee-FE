@@ -1,4 +1,8 @@
+import Api from '../../services/Api';
 import checkPasswordStrength from '../../utils/checkPassword';
+import { calar_coffee_token } from '../../utils/settings';
+import { swalStyled } from '../../utils/swalStyled';
+
 import {
   CLEAN_REGISTER,
   REGISTER_NAME,
@@ -15,6 +19,8 @@ import {
   REGISTER_ERROR,
   REGISTER_PASSWORD_VALIDATE,
 } from '../types/userRegisterTypes';
+import { setGlobalGeneralSpinner } from './globalActions';
+import { getUserData, setUserData } from './userActions';
 
 export const cleanRegister = () => (dispatch) => {
   dispatch({
@@ -176,4 +182,59 @@ export const setRegisterDataPolicy = () => (dispatch, getState) => {
     type: REGISTER_DATA_PROCESSING_POLICY,
     payload: !register_data_processing_policy,
   });
+};
+
+const createCookieToken = (token) => {
+  let sessionExpiresDate = new Date();
+  sessionExpiresDate.setDate(sessionExpiresDate.getDate() + 180);
+
+  document.cookie = `${calar_coffee_token}_token=${token}; expires=${sessionExpiresDate}`;
+};
+
+export const deleteCookieToken = async () => {
+  document.cookie = `${calar_coffee_token}_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+
+  setTimeout(() => {
+    window.location.href = '/';
+  }, 100);
+};
+
+export const onLogOut = () => async (dispatch) => {
+  dispatch(setGlobalGeneralSpinner(true, ''));
+
+  try {
+    dispatch(deleteCookieToken());
+    dispatch(setUserData(null));
+
+    dispatch(setGlobalGeneralSpinner(false, ''));
+  } catch (error) {
+    dispatch(setGlobalGeneralSpinner(false, ''));
+  }
+};
+
+export const onLogin = () => async (dispatch, getState) => {
+  dispatch(setGlobalGeneralSpinner(true, ''));
+
+  const { register_email, register_password } = getState().userRegisterReducer;
+  const data = {
+    email: register_email,
+    password: register_password,
+  };
+  try {
+    const res = await Api.asyncCallMethod('/login', 'POST', data);
+    const { status, response } = res;
+    if (status === 200) {
+      createCookieToken(response.token);
+      dispatch(getUserData());
+      swalStyled.fire('Sesion iniciada', '', 'success');
+      dispatch(setGlobalGeneralSpinner(false, ''));
+      return true;
+    } else {
+      dispatch(setGlobalGeneralSpinner(false, ''));
+      swalStyled.fire('Error', response.message, 'warning');
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };

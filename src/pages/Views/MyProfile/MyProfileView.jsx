@@ -1,41 +1,26 @@
 import MyData from '../../../components/all/MyData/MyData';
 import MyOrdersTable from '../../../components/all/MyOrdersTable/MyOrdersTable';
-import './MyProfileView.css';
-const MyProfileView = () => {
-  const myOrdersData = [
-    {
-      id: 2,
-      bill_number: 'F1323e2312',
-      state: {
-        state_id: 2,
-        state_name: 'En camino',
-      },
-    },
-    {
-      id: 3,
-      bill_number: 'F1d23e2312',
-      state: {
-        state_id: 1,
-        state_name: 'Pendiente',
-      },
-    },
-    {
-      id: 4,
-      bill_number: 'F412331e1233',
-      state: {
-        state_id: 3,
-        state_name: 'Entregado',
-      },
-    },
-    {
-      id: 5,
-      bill_number: 'F0p312313',
-      state: {
-        state_id: 2,
-        state_name: 'En camino',
-      },
-    },
-  ];
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getUserPayStatuses } from '../../../stores/actions/userActions';
+import { useEffect } from 'react';
+import { getCountriesOptions } from '../../../stores/actions/globalActions';
+
+export const MyProfileView = (props) => {
+  const {
+    userReducer: { user_payStatuses },
+    getUserPayStatuses,
+    getCountriesOptions,
+  } = props;
+
+  useEffect(() => {
+    if (user_payStatuses === null) {
+      getUserPayStatuses();
+    }
+    getCountriesOptions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='row gap-3'>
       <div className='col-lg-6 flex-grow-1 changes_data_container'>
@@ -45,10 +30,27 @@ const MyProfileView = () => {
         </div>
       </div>
       <div className='col-lg-4  flex-grow-1 my_orders'>
-        <MyOrdersTable data={myOrdersData} />
+        {user_payStatuses !== null && <MyOrdersTable data={user_payStatuses} />}
       </div>
     </div>
   );
 };
 
-export default MyProfileView;
+MyProfileView.propTypes = {
+  userReducer: PropTypes.array,
+  getUserPayStatuses: PropTypes.func,
+  getCountriesOptions: PropTypes.func,
+};
+
+const mapStateToProps = ({ userReducer }) => {
+  return {
+    userReducer,
+  };
+};
+
+const mapDispatchToProps = {
+  getUserPayStatuses,
+  getCountriesOptions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfileView);

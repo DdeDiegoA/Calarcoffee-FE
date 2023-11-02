@@ -88,5 +88,4 @@ const mapDispatchToProps = {
   setSidebarOpen,
 };
 
-const barMenu = connect(mapStateToProps, mapDispatchToProps)(SideBarMenu);
-export default barMenu;
+export default connect(mapStateToProps, mapDispatchToProps)(SideBarMenu);

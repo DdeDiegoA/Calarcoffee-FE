@@ -4,9 +4,9 @@ import './MyOrdersTable.css';
 const MyOrdersTable = (props) => {
   const { data } = props;
   const pillStyle = {
-    1: '#b9b9b9',
-    2: '#772409',
-    3: '#7bb85b',
+    Pending: '#b9b9b9',
+    'On the way': '#772409',
+    Delivered: '#7bb85b',
   };
 
   return (
@@ -20,13 +20,15 @@ const MyOrdersTable = (props) => {
         <tbody>
           {data.map((order) => (
             <tr className='table__row' key={order.id}>
-              <td className='table__cell '>{order.bill_number}</td>
+              <td className='table__cell '>{order.bill}</td>
               <td className='table__cell '>
                 <span
                   className='pill'
-                  style={{ backgroundColor: pillStyle[order.state.state_id] }}
+                  style={{
+                    backgroundColor: pillStyle[order.Guide?.Status?.nameEn],
+                  }}
                 >
-                  {order.state?.state_name}
+                  {order.Guide?.Status?.name}
                 </span>
               </td>
               <td className='table__cell table__cell-actions'>
@@ -44,7 +46,7 @@ const MyOrdersTable = (props) => {
 };
 
 MyOrdersTable.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default MyOrdersTable;

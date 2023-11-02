@@ -22,3 +22,12 @@ a:hover {
   color: var(--strong-red);
   text-decoration: underline;
 }
+.fc-l-green {
+  color: var(--ligth-green);
+}
+.fc-s-green {
+  color: var(--strong-green);
+}
+.fc-s-brown {
+  color: var(--strong-brown);
+}
