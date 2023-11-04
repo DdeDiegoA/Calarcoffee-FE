@@ -2,27 +2,42 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CategoriesTable from '../../../../components/all/CategoriesTable/CategoriesTable';
 import InputAnimated from '../../../../components/all/inputAnimated/InputAnimated';
+import {
+  getCategoriesList,
+  setDashboardCategorieslist,
+} from '../../../../stores/actions/dashboardActions';
+import { useEffect } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 export const DashboardCategoriesView = (props) => {
-  const data = [
-    {
-      id: 12312,
-      name: 'cafe',
-    },
-    {
-      id: 12312,
-      name: 'metodo',
-    },
-    {
-      id: 12312,
-      name: 'promocion!!',
-    },
-  ];
+  const {
+    dashboardReducer: { dashboard_categories_list },
+    getCategoriesList,
+    setDashboardCategorieslist,
+  } = props;
+
+  useEffect(() => {
+    if (dashboard_categories_list === null) {
+      getCategoriesList();
+    }
+    return () => {
+      setDashboardCategorieslist(null);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='index_dashboard-container'>
       <h2>Categories</h2>
       <div className='row'>
-        <CategoriesTable data={data} />
+        {dashboard_categories_list ? (
+          <CategoriesTable data={dashboard_categories_list} />
+        ) : (
+          <div>
+            <Spinner />
+          </div>
+        )}
         <div className='col-md-6'>
           <div>
             <InputAnimated
@@ -41,12 +56,19 @@ export const DashboardCategoriesView = (props) => {
 };
 
 DashboardCategoriesView.propTypes = {
-  second: PropTypes.third,
+  dashboardReducer: PropTypes.object,
+  getCategoriesList: PropTypes.func,
+  setDashboardCategorieslist: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = ({ dashboardReducer }) => {
+  return { dashboardReducer };
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getCategoriesList,
+  setDashboardCategorieslist,
+};
 
 export default connect(
   mapStateToProps,

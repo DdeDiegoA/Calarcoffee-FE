@@ -16,22 +16,29 @@ const SalesTable = ({ data }) => {
         <tbody>
           {data.map((product, index) => (
             <tr className='table__row' key={index}>
-              <td className='table__cell '>{product.bill_number}</td>
-              <td className='table__cell '>{product.product_name}</td>
+              <td className='table__cell '>{product.bill}</td>
+              <td className='table__cell '>{product.Products[0].name}</td>
               <td className='table__cell table__cell-actions'>
-                {formatPriceCop(product.total_price)}
+                {formatPriceCop(product.bigTotal)}
               </td>
               <td className='table__cell table__cell-actions'>
-                {product?.status.state_name}
+                {product?.Guide.Status.name}
               </td>
               <td className='table__cell table__cell-actions'>
                 <button className='button_info'>
                   <i className='bi bi-info-circle-fill' />
                 </button>
-                {product?.status.state_id !== 3 && (
+                {product?.Guide.Status.nameEn !== 'Delivered' && (
                   <button className='editStock-button'>
-                    {`${product?.status.state_id === 1 && 'Marcar en camino'}
-                  ${product?.status.state_id === 2 && 'Marcar entregado'}`}
+                    {`${
+                      product?.Guide.Status.nameEn === 'Pending' &&
+                      'Marcar en camino'
+                    }
+                    ${
+                      product?.Guide.Status.nameEn === 'On the way'
+                        ? 'Marcar entregado'
+                        : ''
+                    }`}
                   </button>
                 )}
               </td>

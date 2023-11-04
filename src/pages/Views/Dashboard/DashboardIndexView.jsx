@@ -1,64 +1,29 @@
 import MetricInfo from '../../../components/all/MetricInfo/MetricInfo';
 import StockTable from '../../../components/all/StockTable/StockTable';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getProduct } from '../../../stores/actions/productActions';
+import { useEffect } from 'react';
 
-const DashboardIndexView = () => {
-  const stock = [
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-  ];
+export const DashboardIndexView = (props) => {
+  const {
+    productReducer: { products_list },
+    getProduct,
+  } = props;
+
+  useEffect(() => {
+    if (products_list === null) {
+      getProduct();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='index_dashboard-container'>
       <section className='section_stock'>
         <h3>Stock</h3>
         <div>
-          <StockTable data={stock} />
+          {products_list !== null && <StockTable data={products_list} />}
         </div>
       </section>
       <section className='section_metrics'>
@@ -94,4 +59,19 @@ const DashboardIndexView = () => {
   );
 };
 
-export default DashboardIndexView;
+DashboardIndexView.propTypes = {
+  productReducer: PropTypes.object,
+  getProduct: PropTypes.func,
+};
+
+const mapStateToProps = ({ productReducer }) => {
+  return {
+    productReducer,
+  };
+};
+
+const mapDispatchToProps = {
+  getProduct,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardIndexView);

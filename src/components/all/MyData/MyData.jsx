@@ -49,20 +49,20 @@ export const MyData = (props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user_data]);
+
   useEffect(() => {
     if (global_countries_options !== null) {
       getDepartmentOptions(user_selected_country);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [global_countries_options]);
+
   useEffect(() => {
     if (global_departments_options !== null && user_selected_department?.id) {
       getCitiesOptions(user_selected_department);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user_selected_department]);
-
-  console.log(user_selected_city);
 
   return (
     <>

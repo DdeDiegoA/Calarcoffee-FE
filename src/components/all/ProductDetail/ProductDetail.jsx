@@ -16,23 +16,21 @@ const ProductDetail = (props) => {
       className={'cart_slider'}
     >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>{product.nombre}</Offcanvas.Title>
+        <Offcanvas.Title>{product.name}</Offcanvas.Title>
       </Offcanvas.Header>
       <div className='Product_detail_container'>
-        <img src={product.imagen} alt={product.nombre.trim()} />
+        <img src={product.ProductImages[0].src} alt={product.name.trim()} />
         <div className='product_details_price'>
-          {formatPriceCop(product.precio)} <span>COP</span>
+          {formatPriceCop(product.price)} <span>COP</span>
         </div>
         <div className='product_details'>
-          <span>
-            {product.categoria}: {product.tipo}
-          </span>
-          <span>{product.descripcion}</span>
+          <span>{product.Categories[0].name}</span>
+          <span>{product.description}</span>
         </div>
       </div>
       <div className='Product_detail_footer'>
         <div className='CartCardProduct_content_addRemoveProduct'>
-          <button onClick={() => setAmount(amount - 1)}>
+          <button disabled={amount === 0} onClick={() => setAmount(amount - 1)}>
             <i className='bi bi-dash' />
           </button>
           <div>

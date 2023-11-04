@@ -17,18 +17,18 @@ const ProductsTable = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((product, index) => (
-            <tr className='table__row' key={index}>
+          {data.map((product) => (
+            <tr className='table__row' key={product.id}>
               <td className='table__cell '>{product.id}</td>
-              <td className='table__cell '>{product.product_name}</td>
+              <td className='table__cell '>{product.name}</td>
               <td className='table__cell table__cell-actions'>
-                {product.amount}
+                {product.inventory}
               </td>
               <td className='table__cell table__cell-actions'>
-                {product.category}
+                {product.Categories[0].name}
               </td>
               <td className='table__cell table__cell-actions'>
-                {formatPriceCop(product.unit_price)}
+                {formatPriceCop(product.price)}
               </td>
               <td className='table__cell table__cell-actions'>
                 <button className='edit-button'>

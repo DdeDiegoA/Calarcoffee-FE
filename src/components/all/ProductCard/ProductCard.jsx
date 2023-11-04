@@ -10,20 +10,22 @@ const ProductCard = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(product);
   return (
     <>
       <article className='cardProduct_container'>
         <div onClick={handleShow}>
           <figure>
-            <img className='cardProduct_image' src={product.imagen}></img>
+            <img
+              className='cardProduct_image'
+              src={product.ProductImages[0].src}
+            ></img>
           </figure>
           <div className='cardProduct_detail'>
             <div className='cardProduct_detail_data'>
-              <h3 className='cardProduct_detail_name'>{product.nombre}</h3>
+              <h3 className='cardProduct_detail_name'>{product.name}</h3>
               <div>
                 <span className='cardProduct_detail_price'>
-                  {formatPriceCop(product.precio)}
+                  {formatPriceCop(product.price)}
                 </span>
               </div>
               {/* <span className='cardProduct_detail_stock'>Unidades:10</span> */}

@@ -8,6 +8,7 @@ const CategoriesTable = ({ data }) => {
           <tr className='table__row'>
             <th className='table__cell'>ID</th>
             <th className='table__cell'>Nombre</th>
+            <th className='table__cell'>Slug</th>
             <th className='table__cell'>Acciones</th>
           </tr>
         </thead>
@@ -16,6 +17,7 @@ const CategoriesTable = ({ data }) => {
             <tr className='table__row' key={index}>
               <td className='table__cell '>{category.id}</td>
               <td className='table__cell '>{category.name}</td>
+              <td className='table__cell '>{category.slug}</td>
               <td className='table__cell table__cell-actions'>
                 <button className='edit-button'>
                   <i className='bi bi-pencil-square' />

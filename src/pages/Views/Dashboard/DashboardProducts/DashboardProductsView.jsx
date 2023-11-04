@@ -1,57 +1,22 @@
+import { connect } from 'react-redux';
 import ProductsTable from '../../../../components/all/ProductsTable/ProductsTable';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { getProduct } from '../../../../stores/actions/productActions';
 
-const DashboardProductsView = () => {
-  const data = [
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-    {
-      id: 3123123,
-      product_name: 'Cafe Calarca 160gr',
-      amount: 31,
-      category: 'Cafe',
-      unit_price: 40000,
-    },
-  ];
+const DashboardProductsView = (props) => {
+  const {
+    productReducer: { products_list },
+    getProduct,
+  } = props;
+
+  useEffect(() => {
+    if (products_list === null) {
+      getProduct();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className='index_dashboard-container'>
       <h2>products</h2>
@@ -59,10 +24,27 @@ const DashboardProductsView = () => {
         <button className='mb-3 btn align-self-end btn-success'>
           Crear Producto
         </button>
-        <ProductsTable data={data} />
+        {products_list !== null && <ProductsTable data={products_list} />}
       </div>
     </div>
   );
 };
 
-export default DashboardProductsView;
+DashboardProductsView.propTypes = {
+  productReducer: PropTypes.object,
+  getProduct: PropTypes.func,
+};
+
+const mapStateToProps = ({ productReducer }) => {
+  return {
+    productReducer,
+  };
+};
+
+const mapDispatchToProps = {
+  getProduct,
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardProductsView);
