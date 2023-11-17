@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './ProductCard.css';
 import ProductDetail from '../ProductDetail/ProductDetail';
 import { useState } from 'react';
+import ShoppingCart from '../../../utils/cartManager';
 
 const ProductCard = (props) => {
   const { product } = props;
@@ -34,7 +35,7 @@ const ProductCard = (props) => {
         </div>
         <button
           className='cardProduct_detail_button'
-          onClick={() => console.log('boton')}
+          onClick={() => ShoppingCart.addProduct(product)}
         >
           Añadir al carrito
         </button>

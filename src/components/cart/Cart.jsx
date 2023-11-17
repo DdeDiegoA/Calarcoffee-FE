@@ -3,8 +3,10 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import './Cart.css';
 import CartCardProduct from '../all/CartCardProduct/CartCardProduct';
 import { formatPriceCop } from '../../utils/formatPrice';
+import ShoppingCart from '../../utils/cartManager';
 
 function Cart() {
+  const [cartElements, setCartElements] = useState([]);
   const [show, setShow] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -23,6 +25,13 @@ function Cart() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (!cartElements.length) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      setCartElements(cart);
+    }
+  }, [localStorage.getItem('cart')]);
 
   const floatingButtonStyle = isMobile
     ? {
@@ -55,14 +64,10 @@ function Cart() {
         </Offcanvas.Header>
         <div className='cart_content_container'>
           <div className='cart_content_products'>
-            <CartCardProduct />
-            <CartCardProduct />
-            <CartCardProduct />
-            <CartCardProduct />
-            <CartCardProduct />
-            <CartCardProduct />
-            <CartCardProduct />
-            <CartCardProduct />
+            {cartElements.length > 0 &&
+              cartElements.map((element, index) => (
+                <CartCardProduct element={element} key={index} />
+              ))}
           </div>
         </div>
         <div className='cart_footer_content'>
@@ -82,7 +87,7 @@ function Cart() {
             <div className='cart_resume-total-row cart_resume-total'>
               <div className='cart_resume-total-title'>TOTAL:</div>
               <div className='cart_resume-total-price'>
-                {formatPriceCop(300000)}
+                {formatPriceCop(ShoppingCart.getTotalPrice())}
               </div>
             </div>
             <p>

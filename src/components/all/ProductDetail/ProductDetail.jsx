@@ -3,6 +3,7 @@ import { Offcanvas } from 'react-bootstrap';
 import { formatPriceCop } from '../../../utils/formatPrice';
 import { useState } from 'react';
 import './ProductDetail.css';
+import ShoppingCart from '../../../utils/cartManager';
 
 const ProductDetail = (props) => {
   const { show, handleClose, product } = props;
@@ -40,7 +41,9 @@ const ProductDetail = (props) => {
             <i className='bi bi-plus' />
           </button>
         </div>
-        <button>Agregar al carrito</button>
+        <button onClick={() => ShoppingCart.addProduct(product, amount)}>
+          Agregar al carrito
+        </button>
       </div>
     </Offcanvas>
   );
