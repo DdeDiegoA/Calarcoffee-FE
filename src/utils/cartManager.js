@@ -1,23 +1,6 @@
-// export const addProductToCar = (product, amount = 1) => {
-// Obtener el carrito actual del localStorage o un array vacío si no existe
-//   const cart = JSON.parse(localStorage.getItem('cart')) || [];
+import { EventEmitter } from 'events';
 
-// Verificar si el producto ya está en el carrito
-//   const existingProduct = cart.find((item) => item.product.id === product.id);
-
-//   if (existingProduct) {
-// Si el producto ya está en el carrito, aumentar la cantidad
-//     existingProduct.amount += 1;
-//   } else {
-// Si el producto no está en el carrito, agregarlo con cantidad 1
-//     cart.push({ product, amount });
-//   }
-
-// Guardar el carrito actualizado en el localStorage
-//   localStorage.setItem('cart', JSON.stringify(cart));
-
-//   console.log('Producto añadido al carrito:', product);
-// };
+export var cartEventEmitter = new EventEmitter();
 
 class ShoppingCart {
   constructor() {
@@ -41,7 +24,7 @@ class ShoppingCart {
 
     // Actualizar el carrito en el localStorage
     this.saveCart();
-    console.log('Producto añadido al carrito:', product);
+    cartEventEmitter.emit('cartChanged');
   }
 
   // Eliminar un producto del carrito
@@ -50,7 +33,7 @@ class ShoppingCart {
 
     // Actualizar el carrito en el localStorage
     this.saveCart();
-    console.log('Producto eliminado del carrito:', productId);
+    cartEventEmitter.emit('cartChanged');
   }
 
   // Aumentar la cantidad de un producto en el carrito
@@ -61,7 +44,7 @@ class ShoppingCart {
       product.amount += 1;
       // Actualizar el carrito en el localStorage
       this.saveCart();
-      console.log('Cantidad aumentada para el producto:', productId);
+      cartEventEmitter.emit('cartChanged');
     }
   }
 
@@ -73,7 +56,7 @@ class ShoppingCart {
       product.amount -= 1;
       // Actualizar el carrito en el localStorage
       this.saveCart();
-      console.log('Cantidad disminuida para el producto:', productId);
+      cartEventEmitter.emit('cartChanged');
     }
   }
 

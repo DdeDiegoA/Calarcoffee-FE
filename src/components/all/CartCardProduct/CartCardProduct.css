@@ -38,7 +38,7 @@
   margin: auto;
 }
 .CartCardProduct_content_row .trashIcon:hover {
-  transform: scale(1.1);
+  color: rgb(126, 0, 0) (220, 5, 5);
 }
 .CartCardProduct_content_addRemoveProduct {
   display: flex;

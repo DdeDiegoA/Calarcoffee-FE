@@ -13,7 +13,10 @@ const CartCardProduct = (props) => {
       <div className='CartCardProduct_content'>
         <div className='CartCardProduct_content_row'>
           <h3>{product.name}</h3>
-          <i className='bi bi-trash-fill trashIcon' />
+          <i
+            className='bi bi-trash-fill trashIcon'
+            onClick={() => ShoppingCart.removeProduct(product.id)}
+          />
         </div>
         <div className='CartCardProduct_content_row'>
           <div className='CartCardProduct_content_addRemoveProduct'>

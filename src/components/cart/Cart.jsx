@@ -4,6 +4,7 @@ import './Cart.css';
 import CartCardProduct from '../all/CartCardProduct/CartCardProduct';
 import { formatPriceCop } from '../../utils/formatPrice';
 import ShoppingCart from '../../utils/cartManager';
+import { cartEventEmitter } from '../../utils/cartManager';
 
 function Cart() {
   const [cartElements, setCartElements] = useState([]);
@@ -13,25 +14,32 @@ function Cart() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleCartChange = () => {
+    // Actualizar el carrito cuando cambie
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartElements(cart);
+  };
+
+  useEffect(() => {
+    handleCartChange();
+  }, []);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
+    // Registrar el componente para escuchar cambios en el carrito
+    cartEventEmitter.on('cartChanged', handleCartChange);
 
     window.addEventListener('resize', handleResize);
     handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      // Desregistrar el componente cuando se desmonte
+      cartEventEmitter.removeListener('cartChanged', handleCartChange);
     };
   }, []);
-
-  useEffect(() => {
-    if (!cartElements.length) {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      setCartElements(cart);
-    }
-  }, [localStorage.getItem('cart')]);
 
   const floatingButtonStyle = isMobile
     ? {
@@ -41,7 +49,6 @@ function Cart() {
         zIndex: '999',
       }
     : {};
-
   return (
     <>
       <div
