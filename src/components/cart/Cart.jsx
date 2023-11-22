@@ -57,6 +57,7 @@ function Cart() {
         onClick={handleShow}
       >
         <i className='bi bi-cart3'></i>
+        <span>{cartElements.length}</span>
       </div>
       <Offcanvas
         show={show}
@@ -82,13 +83,13 @@ function Cart() {
             <div className='cart_resume-total-row'>
               <div className='cart_resume-total-title'>Subtotal:</div>
               <div className='cart_resume-total-price'>
-                {formatPriceCop(300000)}
+                {formatPriceCop(ShoppingCart.getSubTotal())}
               </div>
             </div>
             <div className='cart_resume-total-row'>
               <div className='cart_resume-total-title'>IVA:</div>
               <div className='cart_resume-total-price'>
-                {formatPriceCop(300000)}
+                {formatPriceCop(ShoppingCart.getIva())}
               </div>
             </div>
             <div className='cart_resume-total-row cart_resume-total'>
@@ -100,7 +101,9 @@ function Cart() {
             <p>
               El costo del envio puede variar dependiendo de la ciudad a enviar
             </p>
-            <button className='cart_resume-pay'>PAGAR</button>
+            <button className='cart_resume-pay' disabled={!cartElements.length}>
+              PAGAR
+            </button>
           </div>
         </div>
       </Offcanvas>

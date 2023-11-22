@@ -68,6 +68,23 @@ class ShoppingCart {
     );
   }
 
+  getIva() {
+    return this.cart.reduce(
+      (total, item) =>
+        total +
+        ((item.product.price * item.product.Taxes[0].percentage) / 100) *
+          item.amount,
+      0
+    );
+  }
+
+  getSubTotal() {
+    const totalPrice = this.getTotalPrice();
+    const iva = this.getIva();
+
+    return totalPrice - iva;
+  }
+
   // Método privado para guardar el carrito en el localStorage
   saveCart() {
     localStorage.setItem('cart', JSON.stringify(this.cart));
