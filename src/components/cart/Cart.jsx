@@ -57,7 +57,9 @@ function Cart() {
         onClick={handleShow}
       >
         <i className='bi bi-cart3'></i>
-        <span>{cartElements.length}</span>
+        {cartElements.length >= 1 && (
+          <span className='amount-elements'>{cartElements.length}</span>
+        )}
       </div>
       <Offcanvas
         show={show}

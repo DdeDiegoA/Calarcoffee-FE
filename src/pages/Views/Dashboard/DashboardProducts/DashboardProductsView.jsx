@@ -1,14 +1,25 @@
 import { connect } from 'react-redux';
 import ProductsTable from '../../../../components/all/ProductsTable/ProductsTable';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getProduct } from '../../../../stores/actions/productActions';
+import Modal from '../../../../components/all/Modal/Modal';
+import CreateProductForm from '../../../../components/forms/CreateProductForm/CreateProductForm';
 
 const DashboardProductsView = (props) => {
   const {
     productReducer: { products_list },
     getProduct,
   } = props;
+  const [visible, setVisible] = useState(false);
+
+  const onVisible = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
   useEffect(() => {
     if (products_list === null) {
@@ -18,15 +29,23 @@ const DashboardProductsView = (props) => {
   }, []);
 
   return (
-    <div className='index_dashboard-container'>
-      <h2>products</h2>
-      <div className='d-flex flex-column'>
-        <button className='mb-3 btn align-self-end btn-success'>
-          Crear Producto
-        </button>
-        {products_list !== null && <ProductsTable data={products_list} />}
+    <>
+      <Modal visible={visible} onClose={onClose}>
+        <CreateProductForm />
+      </Modal>
+      <div className='index_dashboard-container'>
+        <h2>products</h2>
+        <div className='d-flex flex-column'>
+          <button
+            className='mb-3 btn align-self-end btn-success'
+            onClick={onVisible}
+          >
+            Crear Producto
+          </button>
+          {products_list !== null && <ProductsTable data={products_list} />}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

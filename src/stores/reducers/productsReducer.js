@@ -1,7 +1,8 @@
-import { PRODUCTS_LIST } from '../types/productsTypes';
+import { PRODUCTS_LIST, PRODUCTS_TAXES } from '../types/productsTypes';
 
 const INITIAL_STATE = {
   products_list: null,
+  products_taxes: null,
 };
 
 const productReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,11 @@ const productReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         products_list: action.payload,
+      };
+    case PRODUCTS_TAXES:
+      return {
+        ...state,
+        products_taxes: action.payload,
       };
 
     default:

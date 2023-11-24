@@ -7,6 +7,16 @@
 .cart_button:hover {
   transform: scale(1.2, 1.2);
 }
+.amount-elements {
+  position: relative;
+  top: -15px;
+  left: -15px;
+  color: var(--white);
+  background-color: rgb(200, 2, 2);
+  padding: 2px 6px;
+  font-size: 15px;
+  border-radius: 100%;
+}
 .cart_slider .offcanvas-title {
   color: var(--strong-green);
   font-weight: bold;
