@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
 import { formatPriceCop } from '../../../utils/formatPrice';
+import { connect } from 'react-redux';
 import './ProductsTable.css';
+import { getProductById } from '../../../stores/actions/productActions';
 
-const ProductsTable = ({ data }) => {
+const ProductsTable = ({ data, onOpen, getProductById }) => {
+  const onEdit = (id) => {
+    getProductById(id);
+    onOpen('edit');
+  };
+
   return (
     <div className='products_table_container'>
       <table className='table'>
@@ -31,7 +38,10 @@ const ProductsTable = ({ data }) => {
                 {formatPriceCop(product.price)}
               </td>
               <td className='table__cell table__cell-actions'>
-                <button className='edit-button'>
+                <button
+                  className='edit-button'
+                  onClick={() => onEdit(product.id)}
+                >
                   <i className='bi bi-pencil-square' />
                 </button>
                 <button className='editStock-button'>Stock</button>
@@ -49,6 +59,18 @@ const ProductsTable = ({ data }) => {
 
 ProductsTable.propTypes = {
   data: PropTypes.array.isRequired,
+  onOpen: PropTypes.func,
+  getProductById: PropTypes.func,
 };
 
-export default ProductsTable;
+const mapStateToProps = ({ productReducer }) => {
+  return {
+    productReducer,
+  };
+};
+
+const mapDispatchToProps = {
+  getProductById,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsTable);

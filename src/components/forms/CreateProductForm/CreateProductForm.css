@@ -1,11 +1,11 @@
 .product_form_container {
-  max-width: 700px;
   margin: auto;
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   gap: 2rem;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
 }
 
 .product_header {
@@ -26,7 +26,9 @@
 
 .product_body {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .product_body > * {
@@ -50,4 +52,50 @@
 .inputs_group {
   display: flex;
   gap: 1rem;
+}
+.form_column {
+  min-width: 50%;
+}
+
+.items-selected_items_container {
+  display: flex;
+  gap: 0.5rem;
+  border: 2px solid var(--hand-gray);
+  border-radius: 10px;
+  min-height: 100px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 5px;
+}
+
+.item-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+  padding: 0 10px;
+  background-color: var(--ligth-green);
+  border-radius: 20px;
+  color: var(--white);
+}
+.item-selected span {
+  color: var(--strong-red);
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+}
+.item-selected span:hover {
+  cursor: pointer;
+}
+.select-elements_container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.select-elements_container .staticselect_Input {
+  margin: 0;
+}
+.product_images {
+  margin-bottom: 50px;
 }

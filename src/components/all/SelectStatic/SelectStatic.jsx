@@ -24,6 +24,8 @@ const SelectStatic = ({
     setFilteredOptions(filtered);
   };
 
+  useEffect(() => {}, [options]);
+
   const handleInputFocus = () => {
     setIsFocused(true);
   };

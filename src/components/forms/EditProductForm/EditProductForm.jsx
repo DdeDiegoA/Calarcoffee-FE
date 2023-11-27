@@ -1,19 +1,18 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useEffect, useState } from 'react';
-import './CreateProductForm.css';
-import InputStatic from '../../all/InputStatic/InputStatic';
 import {
   getTaxes,
   getCategories,
   createProduct,
 } from '../../../stores/actions/productActions';
 import SelectStatic from '../../all/SelectStatic/SelectStatic';
+import InputStatic from '../../all/InputStatic/InputStatic';
 import ImageUploader from '../../all/ImageUploader/ImageUploader';
+import { useEffect, useState } from 'react';
 
-export const CreateProductForm = (props) => {
+export const EditProductForm = (props) => {
   const {
-    productReducer: { products_taxes, products_categories },
+    productReducer: { products_taxes, products_categories, product_item },
     getTaxes,
     getCategories,
     createProduct,
@@ -29,17 +28,9 @@ export const CreateProductForm = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products_taxes, products_categories]);
 
-  const intialFormData = {
-    name: '',
-    price: 0,
-    inventory: 0,
-    description: '',
-    descriptionEN: '',
-    taxes: [],
-    categories: [],
-  };
+  console.log(product_item);
 
-  const [formData, setFormData] = useState(intialFormData);
+  const [formData, setFormData] = useState(product_item);
 
   const [productImages, setProductImages] = useState([]);
 
@@ -75,7 +66,6 @@ export const CreateProductForm = (props) => {
   const handleSubmit = async () => {
     // console.log('Formulario enviado:', formData, productImages);
     await createProduct(formData, productImages);
-    setFormData(intialFormData);
     setProductImages([]);
   };
   return (
@@ -126,13 +116,13 @@ export const CreateProductForm = (props) => {
               // icon={'bi bi-map-fill'}
               placeholder={'Categorias'}
               onChange={(value) => handleSelect('categories', value)}
-              value={formData.categories[0]?.name}
+              value={formData.Categories[0]?.name}
             />
             <div className='items-selected_container'>
               <div className='items-selected_title'>Categorias:</div>
               <div className='items-selected_items_container'>
-                {formData.categories.length >= 1 &&
-                  formData.categories.map((categorie, index) => {
+                {formData.Categories.length >= 1 &&
+                  formData.Categories.map((categorie, index) => {
                     return (
                       <div className='item-selected' key={index}>
                         {categorie.name}
@@ -177,13 +167,13 @@ export const CreateProductForm = (props) => {
               // icon={'bi bi-map-fill'}
               placeholder={'Impuestos'}
               onChange={(value) => handleSelect('taxes', value)}
-              value={formData.taxes[0]?.name}
+              value={formData.Taxes[0]?.name}
             />
             <div className='items-selected_container'>
               <div className='items-selected_title'>Impuestos:</div>
               <div className='items-selected_items_container'>
-                {formData.taxes.length >= 1 &&
-                  formData.taxes.map((tax, index) => {
+                {formData.Taxes.length >= 1 &&
+                  formData.Taxes.map((tax, index) => {
                     return (
                       <div className='item-selected' key={index}>
                         {tax.name}
@@ -208,7 +198,7 @@ export const CreateProductForm = (props) => {
   );
 };
 
-CreateProductForm.propTypes = {
+EditProductForm.propTypes = {
   productReducer: PropTypes.object,
   getTaxes: PropTypes.func,
   getCategories: PropTypes.func,
@@ -227,4 +217,4 @@ const mapDispatchToProps = {
   createProduct,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProductForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProductForm);

@@ -14,7 +14,7 @@ const Modal = ({ visible, onClose, children }) => {
             Cerrar
           </button>
         </div>
-        {children}
+        <div className='modal_content_children'>{children}</div>
       </div>
     </div>
   );
