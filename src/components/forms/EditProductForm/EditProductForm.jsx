@@ -4,19 +4,24 @@ import {
   getTaxes,
   getCategories,
   createProduct,
+  setProductItem,
+  getProductById,
+  updateProduct,
 } from '../../../stores/actions/productActions';
 import SelectStatic from '../../all/SelectStatic/SelectStatic';
 import InputStatic from '../../all/InputStatic/InputStatic';
-import ImageUploader from '../../all/ImageUploader/ImageUploader';
 import { useEffect, useState } from 'react';
+import ImageList from '../../all/ImagesList/ImagesList';
+import './EditProductForm.css';
 
 export const EditProductForm = (props) => {
   const {
     productReducer: { products_taxes, products_categories, product_item },
     getTaxes,
     getCategories,
-    createProduct,
+    updateProduct,
   } = props;
+  const [formData, setFormData] = useState(product_item);
 
   useEffect(() => {
     if (products_taxes === null) {
@@ -25,16 +30,12 @@ export const EditProductForm = (props) => {
     if (products_categories === null) {
       getCategories();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products_taxes, products_categories]);
 
-  console.log(product_item);
-
-  const [formData, setFormData] = useState(product_item);
-
-  const [productImages, setProductImages] = useState([]);
-
   useEffect(() => {}, [formData]);
+
   const handleChange = (field, value) => {
     setFormData({
       ...formData,
@@ -64,18 +65,20 @@ export const EditProductForm = (props) => {
   };
 
   const handleSubmit = async () => {
-    // console.log('Formulario enviado:', formData, productImages);
-    await createProduct(formData, productImages);
-    setProductImages([]);
+    console.log('Formulario enviado:', formData);
+    await updateProduct(formData);
   };
+
   return (
     <div className='product_form_container'>
       <div className='product_header'>
         <h3>¡Agrega un nuevo producto!</h3>
         <h5>Rellena los detalles del producto</h5>
       </div>
-      <div className='product_images'>
-        <ImageUploader state={productImages} setState={setProductImages} />
+      <div className='product_images_list'>
+        {product_item !== null && (
+          <ImageList ProductImages={product_item?.ProductImages}></ImageList>
+        )}
       </div>
       <div className='product_body'>
         <div className='form_column'>
@@ -86,7 +89,7 @@ export const EditProductForm = (props) => {
             placeholder='Nombre del producto'
             type='text'
             onChange={(value) => handleChange('name', value)}
-            value={formData.name}
+            value={formData?.name}
           />
           <div className='inputs_group'>
             <InputStatic
@@ -96,7 +99,7 @@ export const EditProductForm = (props) => {
               placeholder='Precio'
               type='number'
               onChange={(value) => handleChange('price', value)}
-              value={formData.price}
+              value={formData?.price}
             />
             <InputStatic
               icon='bi bi-archive'
@@ -105,7 +108,7 @@ export const EditProductForm = (props) => {
               placeholder='Inventario'
               type='number'
               onChange={(value) => handleChange('inventory', value)}
-              value={formData.inventory}
+              value={formData?.inventory}
             />
           </div>
           <div className='select-elements_container'>
@@ -116,13 +119,13 @@ export const EditProductForm = (props) => {
               // icon={'bi bi-map-fill'}
               placeholder={'Categorias'}
               onChange={(value) => handleSelect('categories', value)}
-              value={formData.Categories[0]?.name}
+              value={formData?.Categories[0]?.name}
             />
             <div className='items-selected_container'>
               <div className='items-selected_title'>Categorias:</div>
               <div className='items-selected_items_container'>
-                {formData.Categories.length >= 1 &&
-                  formData.Categories.map((categorie, index) => {
+                {formData?.Categories.length >= 1 &&
+                  formData?.Categories.map((categorie, index) => {
                     return (
                       <div className='item-selected' key={index}>
                         {categorie.name}
@@ -148,7 +151,7 @@ export const EditProductForm = (props) => {
             placeholder='Descripción'
             type='text'
             onChange={(value) => handleChange('description', value)}
-            value={formData.description}
+            value={formData?.description}
           />
           <InputStatic
             icon='bi bi-file-earmark-text'
@@ -157,7 +160,7 @@ export const EditProductForm = (props) => {
             placeholder='Descripción en inglés'
             type='text'
             onChange={(value) => handleChange('descriptionEN', value)}
-            value={formData.descriptionEN}
+            value={formData?.descriptionEN}
           />
           <div className='select-elements_container'>
             <SelectStatic
@@ -167,13 +170,13 @@ export const EditProductForm = (props) => {
               // icon={'bi bi-map-fill'}
               placeholder={'Impuestos'}
               onChange={(value) => handleSelect('taxes', value)}
-              value={formData.Taxes[0]?.name}
+              value={formData?.Taxes[0]?.name}
             />
             <div className='items-selected_container'>
               <div className='items-selected_title'>Impuestos:</div>
               <div className='items-selected_items_container'>
-                {formData.Taxes.length >= 1 &&
-                  formData.Taxes.map((tax, index) => {
+                {formData?.Taxes.length >= 1 &&
+                  formData?.Taxes.map((tax, index) => {
                     return (
                       <div className='item-selected' key={index}>
                         {tax.name}
@@ -191,7 +194,7 @@ export const EditProductForm = (props) => {
 
       <div className='product_footer'>
         <button className='submit-btn' onClick={handleSubmit}>
-          Agregar Producto
+          Guardar <i className='bi bi-floppy2'></i>
         </button>
       </div>
     </div>
@@ -203,6 +206,9 @@ EditProductForm.propTypes = {
   getTaxes: PropTypes.func,
   getCategories: PropTypes.func,
   createProduct: PropTypes.func,
+  setProductItem: PropTypes.func,
+  getProductById: PropTypes.func,
+  updateProduct: PropTypes.func,
 };
 
 const mapStateToProps = ({ productReducer }) => {
@@ -215,6 +221,9 @@ const mapDispatchToProps = {
   getTaxes,
   getCategories,
   createProduct,
+  setProductItem,
+  getProductById,
+  updateProduct,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProductForm);

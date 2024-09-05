@@ -1,0 +1,47 @@
+.image-list-container {
+  margin: 0;
+}
+
+.image-list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.image-list-container th,
+.image-list-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  text-wrap: pretty;
+  overflow: hidden;
+  min-width: 100px;
+  max-width: 210px;
+}
+
+.image-list-container td input {
+  max-width: 20%;
+  text-align: center;
+}
+
+.image-list-container th {
+  background-color: #f2f2f2;
+}
+
+.preview-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.action-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.action-button:hover {
+  background-color: #45a049;
+}

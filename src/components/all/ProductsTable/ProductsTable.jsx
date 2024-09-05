@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { formatPriceCop } from '../../../utils/formatPrice';
 import { connect } from 'react-redux';
-import './ProductsTable.css';
 import { getProductById } from '../../../stores/actions/productActions';
+import './ProductsTable.css';
 
 const ProductsTable = ({ data, onOpen, getProductById }) => {
-  const onEdit = (id) => {
-    getProductById(id);
+  const onEdit = async (id) => {
+    await getProductById(id);
     onOpen('edit');
   };
 

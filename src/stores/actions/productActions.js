@@ -49,10 +49,12 @@ export const getProduct = () => async (dispatch) => {
 
 export const getProductById = (productId) => async (dispatch) => {
   try {
+    dispatch(setGlobalGeneralSpinner(true, ''));
     const res = await Api.asyncCallMethod(`/product/${productId}`, 'GET');
     const { status, response } = res;
     if (status === 200) {
       dispatch(setProductItem(response.body));
+      dispatch(setGlobalGeneralSpinner(false, ''));
     }
   } catch (error) {
     console.log(error);
@@ -153,5 +155,22 @@ const addImageToProduct = (images, productId) => async (dispatch) => {
     dispatch(getProduct());
   } catch (error) {
     console.error('Error al procesar las imágenes:', error);
+  }
+};
+
+export const updateProduct = (data) => async (dispatch) => {
+  try {
+    dispatch(setGlobalGeneralSpinner(true, ''));
+
+    const res = await Api.asyncCallMethod(`/product/${data.id}`, 'PUT', data);
+    const { status } = res;
+    if (status === 200) {
+      dispatch(setGlobalGeneralSpinner(false, ''));
+      dispatch(getProductById(data.id));
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(getProduct());
   }
 };
